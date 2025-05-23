@@ -60,6 +60,18 @@ public class ListE<T> {
     }
   }
 
+  public ListE<T> map(Function<T, T> func) {
+    ListE<T> newList = new ListE<T>();
+    Node<T> tmp = head;
+
+    while (tmp != null) {
+      newList.add(func.apply(tmp.getData()));
+      tmp = tmp.getNext();
+    }
+
+    return newList;
+  }
+
   // Imprime la lista
   void imprimir() {
     Node<T> actual = head;
