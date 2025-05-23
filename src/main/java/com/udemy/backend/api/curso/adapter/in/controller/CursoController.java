@@ -34,8 +34,14 @@ public class CursoController {
     return ResponseEntity.ok(findCursoPort.getAll());
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/id/{id}")
   public ResponseEntity<Curso> getById(@PathVariable Long id) {
     return ResponseEntity.ok(findCursoPort.getById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado")));
+  }
+
+  @GetMapping("/name/{name}")
+  public ResponseEntity<Curso> getByName(@PathVariable String name) {
+    return ResponseEntity
+        .ok(findCursoPort.getByName(name).orElseThrow(() -> new RuntimeException("Curso no encontrado")));
   }
 }

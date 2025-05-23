@@ -24,4 +24,12 @@ public interface FindCursoPort {
    * @return El curso, si no lo encuentra retorna vacío.
    */
   Optional<Curso> getById(Long id);
+
+  /**
+   * * Obtiene un curso por su nombre.
+   *
+   * @param name El nombre del curso.
+   * @return El curso, si no lo encuentra retorna vacío.
+   */
+  Optional<Curso> getByName(String name);
 }

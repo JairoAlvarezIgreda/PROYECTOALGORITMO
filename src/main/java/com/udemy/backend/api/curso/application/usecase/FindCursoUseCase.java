@@ -31,4 +31,9 @@ public final class FindCursoUseCase implements FindCursoPort {
   public Optional<Curso> getById(Long id) {
     return cursoRepository.findById(id);
   }
+
+  @Override
+  public Optional<Curso> getByName(String name) {
+    return cursoRepository.findBy(Curso::getName, name);
+  }
 }
