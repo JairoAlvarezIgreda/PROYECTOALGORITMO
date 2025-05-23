@@ -1,5 +1,7 @@
 package com.udemy.backend.api.curso.application.port.in;
 
+import java.util.Optional;
+
 import com.udemy.backend.api.curso.domain.model.Curso;
 import com.udemy.backend.api.shared.domain.operator.ListE;
 
@@ -14,4 +16,12 @@ public interface FindCursoPort {
    * @return Los cursos.
    */
   ListE<Curso> getAll();
+
+  /**
+   * * Obtiene un curso por su id.
+   * 
+   * @param id El id.
+   * @return El curso, si no lo encuentra retorna vacío.
+   */
+  Optional<Curso> getById(Long id);
 }

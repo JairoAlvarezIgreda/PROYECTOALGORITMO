@@ -14,4 +14,7 @@ import com.udemy.backend.api.shared.application.repository.GlobalBasicRepository
  * * GlobalBasicRepository y CursoRepository.
  */
 public class ImplCursoRepository extends GlobalBasicRepository<Curso, Long> implements CursoRepository {
+  public ImplCursoRepository() {
+    super(Curso::getId);
+  }
 }

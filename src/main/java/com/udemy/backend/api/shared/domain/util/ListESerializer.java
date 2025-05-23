@@ -13,7 +13,7 @@ public class ListESerializer extends JsonSerializer<ListE<?>> {
   public void serialize(ListE<?> value, JsonGenerator gen, SerializerProvider serializers)
       throws IOException {
     gen.writeStartArray();
-    Node<?> current = value.getCabeza();
+    Node<?> current = value.getHead();
     while (current != null) {
       gen.writeObject(current.getData());
       current = current.getNext();

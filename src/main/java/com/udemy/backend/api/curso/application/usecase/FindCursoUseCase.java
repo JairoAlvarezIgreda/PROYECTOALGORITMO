@@ -1,5 +1,7 @@
 package com.udemy.backend.api.curso.application.usecase;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.udemy.backend.api.curso.adapter.out.repository.CursoRepository;
@@ -23,5 +25,10 @@ public final class FindCursoUseCase implements FindCursoPort {
   @Override
   public ListE<Curso> getAll() {
     return cursoRepository.getAll();
+  }
+
+  @Override
+  public Optional<Curso> getById(Long id) {
+    return cursoRepository.findById(id);
   }
 }

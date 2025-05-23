@@ -73,11 +73,11 @@ public class ListE<T> {
   }
 
   // Imprime la lista
-  void imprimir() {
-    Node<T> actual = head;
-    while (actual != null) {
-      System.out.print(actual.getData() + ":" + actual.index.toString() + " -> ");
-      actual = actual.getNext();
+  void printList() {
+    Node<T> tmp = head;
+    while (tmp != null) {
+      System.out.print(tmp.getData().toString() + ":" + tmp.index.toString() + " -> ");
+      tmp = tmp.getNext();
     }
     System.out.println("null");
   }
@@ -121,21 +121,5 @@ public class ListE<T> {
       actual.index = indice++;
       actual = actual.getNext();
     }
-  }
-
-  void eliminarPares() {
-    Node<T> actual = head;
-
-    while (actual.getNext() != null) {
-      if (actual.index % 2 == 0 || actual.index == 0) {
-        delete(actual.getData());
-      }
-      actual = actual.getNext();
-    }
-  }
-
-  @Override
-  public String toString() {
-    return "aa";
   }
 }

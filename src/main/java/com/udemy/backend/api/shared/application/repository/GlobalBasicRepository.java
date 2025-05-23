@@ -2,7 +2,9 @@ package com.udemy.backend.api.shared.application.repository;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Function;
 
+import com.udemy.backend.api.shared.domain.data.Node;
 import com.udemy.backend.api.shared.domain.operator.ListE;
 import com.udemy.backend.api.shared.domain.query.FieldUpdate;
 import com.udemy.backend.api.shared.domain.repository.BasicRepository;
@@ -12,15 +14,28 @@ import com.udemy.backend.api.shared.domain.repository.BasicRepository;
  */
 public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E, ID> {
   private final ListE<E> list = new ListE<E>(); // Inicializa la lista dependiendo la instancia.
+  private final Function<E, ID> idExtractor;
 
   @Override
   public ListE<E> getAll() {
     return list;
   }
 
+  public GlobalBasicRepository(Function<E, ID> idExtractor) {
+    this.idExtractor = idExtractor;
+  }
+
   @Override
   public Optional<E> findById(ID id) {
-    throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    Node<E> current = list.getHead();
+
+    while (current != null) {
+      if (idExtractor.apply(current.getData()).equals(id))
+        return Optional.of(current.getData());
+      current = current.getNext();
+    }
+
+    return Optional.empty();
   }
 
   @Override
