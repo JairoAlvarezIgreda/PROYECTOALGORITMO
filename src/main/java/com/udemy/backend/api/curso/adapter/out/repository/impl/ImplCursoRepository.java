@@ -17,4 +17,5 @@ public class ImplCursoRepository extends GlobalBasicRepository<Curso, Long> impl
   public ImplCursoRepository() {
     super(Curso::getId);
   }
+
 }

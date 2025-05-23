@@ -2,6 +2,7 @@ package com.udemy.backend.api.shared.domain.repository;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Function;
 
 import com.udemy.backend.api.shared.domain.operator.ListE;
 import com.udemy.backend.api.shared.domain.query.FieldUpdate;
@@ -29,6 +30,15 @@ public interface BasicRepository<E, ID> {
    * @return La entidad.
    */
   Optional<E> findById(ID id);
+
+  /**
+   * * Busca una entidad por uno de sus parámetros.
+   * 
+   * @param extractor El identificador del parámetro.
+   * @param <R>       El valor de la búsqueda.
+   * @return La entidad.
+   */
+  <R> Optional<E> findBy(Function<E, R> extractor, R expected);
 
   /**
    * * Guarda la entidad en la lista.

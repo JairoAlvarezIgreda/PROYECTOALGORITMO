@@ -1,5 +1,6 @@
 package com.udemy.backend.api.shared.domain.operator;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -26,6 +27,19 @@ public class ListE<T> {
       }
       tmp.setNext(newNode);
     }
+  }
+
+  public <R> Optional<T> getBy(Function<T, R> idExtractor, R id) {
+    Node<T> current = head;
+
+    while (current != null) {
+      if (idExtractor.apply(current.getData()).equals(id)) {
+        return Optional.of(current.getData());
+      }
+      current = current.getNext();
+    }
+
+    return Optional.empty();
   }
 
   public int size() {

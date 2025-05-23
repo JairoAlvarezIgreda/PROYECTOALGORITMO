@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Function;
 
-import com.udemy.backend.api.shared.domain.data.Node;
 import com.udemy.backend.api.shared.domain.operator.ListE;
 import com.udemy.backend.api.shared.domain.query.FieldUpdate;
 import com.udemy.backend.api.shared.domain.repository.BasicRepository;
@@ -27,15 +26,12 @@ public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E,
 
   @Override
   public Optional<E> findById(ID id) {
-    Node<E> current = list.getHead();
+    return list.getBy(idExtractor, id);
+  }
 
-    while (current != null) {
-      if (idExtractor.apply(current.getData()).equals(id))
-        return Optional.of(current.getData());
-      current = current.getNext();
-    }
-
-    return Optional.empty();
+  @Override
+  public <R> Optional<E> findBy(Function<E, R> extractor, R expected) {
+    return list.getBy(extractor, expected);
   }
 
   @Override
