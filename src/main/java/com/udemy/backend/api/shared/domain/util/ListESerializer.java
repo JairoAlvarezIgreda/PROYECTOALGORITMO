@@ -15,8 +15,8 @@ public class ListESerializer extends JsonSerializer<ListE<?>> {
     gen.writeStartArray();
     Node<?> current = value.getCabeza();
     while (current != null) {
-      gen.writeObject(current.getDato());
-      current = current.getSiguiente();
+      gen.writeObject(current.getData());
+      current = current.getNext();
     }
     gen.writeEndArray();
   }

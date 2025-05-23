@@ -19,10 +19,10 @@ public class ListE<T> {
       cabeza = nuevoNode;
     } else {
       Node<T> actual = cabeza;
-      while (actual.siguiente != null) {
-        actual = actual.siguiente;
+      while (actual.getNext() != null) {
+        actual = actual.getNext();
       }
-      actual.siguiente = nuevoNode;
+      actual.setNext(nuevoNode);
     }
   }
 
@@ -31,7 +31,7 @@ public class ListE<T> {
     Integer size = 0;
     while (actual != null) {
       size++;
-      actual = actual.siguiente;
+      actual = actual.getNext();
     }
     return size;
   }
@@ -40,18 +40,18 @@ public class ListE<T> {
   void imprimir() {
     Node<T> actual = cabeza;
     while (actual != null) {
-      System.out.print(actual.dato + ":" + actual.index.toString() + " -> ");
-      actual = actual.siguiente;
+      System.out.print(actual.getData() + ":" + actual.index.toString() + " -> ");
+      actual = actual.getNext();
     }
     System.out.println("null");
   }
 
-  public T buscar(T dato) {
+  public T buscar(T data) {
     Node<T> actual = cabeza;
     while (actual != null) {
-      if (actual.dato == dato)
-        return actual.dato;
-      actual = actual.siguiente;
+      if (actual.getData() == data)
+        return actual.getData();
+      actual = actual.getNext();
     }
     return null;
   }
@@ -60,20 +60,20 @@ public class ListE<T> {
     if (cabeza == null)
       return;
 
-    if (cabeza.dato.equals(dato)) {
-      cabeza = cabeza.siguiente;
+    if (cabeza.getData().equals(dato)) {
+      cabeza = cabeza.getNext();
       actualizarIndicesDesde(cabeza, 0);
       return;
     }
 
     Node<T> actual = cabeza;
-    while (actual.siguiente != null && !actual.siguiente.dato.equals(dato)) {
-      actual = actual.siguiente;
+    while (actual.getNext() != null && !actual.getNext().getData().equals(dato)) {
+      actual = actual.getNext();
     }
 
-    if (actual.siguiente != null) {
-      actual.siguiente = actual.siguiente.siguiente;
-      actualizarIndicesDesde(actual.siguiente, actual.index + 1);
+    if (actual.getNext() != null) {
+      actual.setNext(actual.getNext().getNext());
+      actualizarIndicesDesde(actual.getNext(), actual.index + 1);
     }
   }
 
@@ -82,18 +82,18 @@ public class ListE<T> {
     int indice = indiceInicial;
     while (actual != null) {
       actual.index = indice++;
-      actual = actual.siguiente;
+      actual = actual.getNext();
     }
   }
 
   void eliminarPares() {
     Node<T> actual = cabeza;
 
-    while (actual.siguiente != null) {
+    while (actual.getNext() != null) {
       if (actual.index % 2 == 0 || actual.index == 0) {
-        eliminar(actual.dato);
+        eliminar(actual.getData());
       }
-      actual = actual.siguiente;
+      actual = actual.getNext();
     }
   }
 

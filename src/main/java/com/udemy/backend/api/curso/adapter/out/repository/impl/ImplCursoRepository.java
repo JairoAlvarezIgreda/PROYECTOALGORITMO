@@ -7,7 +7,11 @@ import com.udemy.backend.api.curso.adapter.out.repository.CursoRepository;
 import com.udemy.backend.api.curso.domain.model.Curso;
 import com.udemy.backend.api.shared.application.repository.GlobalBasicRepository;
 
-@Primary
-@Repository
+@Primary // Equivale a un bean como iniciador.
+@Repository // Componente que refiere a un repositorio que encapsula un data storage.
+/**
+ * * Se inicializa el repositorio extendiendo los métodos de
+ * * GlobalBasicRepository y CursoRepository.
+ */
 public class ImplCursoRepository extends GlobalBasicRepository<Curso, Long> implements CursoRepository {
 }
