@@ -10,7 +10,7 @@ import com.udemy.backend.api.shared.domain.repository.BasicRepository;
 /**
  * * Clase global para establecer todas las funciones básicas de un repositorio.
  */
-public final class GlobalBasicRepository<E, ID> implements BasicRepository<E, ID> {
+public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E, ID> {
   private final ListE<E> list = new ListE<E>(); // Inicializa la lista dependiendo la instancia.
 
   @Override
@@ -25,7 +25,8 @@ public final class GlobalBasicRepository<E, ID> implements BasicRepository<E, ID
 
   @Override
   public E save(E entity) {
-    throw new UnsupportedOperationException("Unimplemented method 'save'");
+    list.insertar(entity);
+    return list.buscar(entity);
   }
 
   @Override

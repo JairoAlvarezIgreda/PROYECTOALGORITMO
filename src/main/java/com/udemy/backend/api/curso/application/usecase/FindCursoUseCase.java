@@ -16,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * * Implementación de la lógica para buscar cursos.
  */
-public class FindCursoUseCase implements FindCursoPort {
+public final class FindCursoUseCase implements FindCursoPort {
+
   private final CursoRepository cursoRepository;
 
   @Override
