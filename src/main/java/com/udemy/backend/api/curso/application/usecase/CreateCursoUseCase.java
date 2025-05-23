@@ -10,12 +10,12 @@ import com.udemy.backend.api.curso.domain.request.CreateCursoRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * * Aquí se implementa toda la lógica para crear un curso.
- */
 @Slf4j
 @Service
 @RequiredArgsConstructor
+/**
+ * * Implementación de la lógica para crear un curso.
+ */
 public final class CreateCursoUseCase implements CreateCursoPort {
 
   private final CursoRepository cursoRepository;

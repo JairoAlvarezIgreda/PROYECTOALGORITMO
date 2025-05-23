@@ -1,7 +1,13 @@
 package com.udemy.backend.api.shared.domain.operator;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.udemy.backend.api.shared.domain.data.Node;
+import com.udemy.backend.api.shared.domain.util.ListESerializer;
 
+import lombok.Getter;
+
+@Getter
+@JsonSerialize(using = ListESerializer.class)
 public class ListE<T> {
   Node<T> cabeza;
 
@@ -40,7 +46,7 @@ public class ListE<T> {
     System.out.println("null");
   }
 
-  T buscar(T dato) {
+  public T buscar(T dato) {
     Node<T> actual = cabeza;
     while (actual != null) {
       if (actual.dato == dato)
@@ -50,7 +56,7 @@ public class ListE<T> {
     return null;
   }
 
-  void eliminar(T dato) {
+  public void eliminar(T dato) {
     if (cabeza == null)
       return;
 
@@ -89,5 +95,10 @@ public class ListE<T> {
       }
       actual = actual.siguiente;
     }
+  }
+
+  @Override
+  public String toString() {
+    return "aa";
   }
 }
