@@ -19,12 +19,14 @@ import lombok.extern.slf4j.Slf4j;
 public final class CreateCursoUseCase implements CreateCursoPort {
 
   private final CursoRepository cursoRepository;
+  private Long idGenerator = 0L;
 
   @Override
   public Curso create(CreateCursoRequest request) {
     // Primero se deben obtener y construir un nuevo objeto con los datos de la
     // request.
-    Curso newCurso = Curso.builder().name(request.getName()).build();
+    Curso newCurso = Curso.builder().id(idGenerator).name(request.getName()).build();
+    idGenerator += 1;
 
     // Se guarda el nuevo curso en la base de datos con las funciones del
     // repositorio.
