@@ -9,25 +9,25 @@ import lombok.Getter;
 @Getter
 @JsonSerialize(using = ListESerializer.class)
 public class ListE<T> {
-  Node<T> cabeza;
+  Node<T> head;
 
   // Agrega un node al final de la lista
-  public void insertar(T dato) {
-    Node<T> nuevoNode = new Node<T>(dato, size());
+  public void add(T data) {
+    Node<T> newNode = new Node<T>(data, size());
 
-    if (cabeza == null) {
-      cabeza = nuevoNode;
+    if (head == null) {
+      head = newNode;
     } else {
-      Node<T> actual = cabeza;
-      while (actual.getNext() != null) {
-        actual = actual.getNext();
+      Node<T> tmp = head;
+      while (tmp.getNext() != null) {
+        tmp = tmp.getNext();
       }
-      actual.setNext(nuevoNode);
+      tmp.setNext(newNode);
     }
   }
 
   Integer size() {
-    Node<T> actual = cabeza;
+    Node<T> actual = head;
     Integer size = 0;
     while (actual != null) {
       size++;
@@ -38,7 +38,7 @@ public class ListE<T> {
 
   // Imprime la lista
   void imprimir() {
-    Node<T> actual = cabeza;
+    Node<T> actual = head;
     while (actual != null) {
       System.out.print(actual.getData() + ":" + actual.index.toString() + " -> ");
       actual = actual.getNext();
@@ -47,7 +47,7 @@ public class ListE<T> {
   }
 
   public T buscar(T data) {
-    Node<T> actual = cabeza;
+    Node<T> actual = head;
     while (actual != null) {
       if (actual.getData() == data)
         return actual.getData();
@@ -56,28 +56,29 @@ public class ListE<T> {
     return null;
   }
 
-  public void eliminar(T dato) {
-    if (cabeza == null)
+  public void delete(T data) {
+    if (head == null)
       return;
 
-    if (cabeza.getData().equals(dato)) {
-      cabeza = cabeza.getNext();
-      actualizarIndicesDesde(cabeza, 0);
+    if (head.getData().equals(data)) {
+      head = head.getNext();
+      updateIndex(head, 0);
       return;
     }
 
-    Node<T> actual = cabeza;
-    while (actual.getNext() != null && !actual.getNext().getData().equals(dato)) {
-      actual = actual.getNext();
+    Node<T> tmp = head;
+    while (tmp.getNext() != null && !tmp.getNext().getData().equals(data)) {
+      tmp = tmp.getNext();
     }
 
-    if (actual.getNext() != null) {
-      actual.setNext(actual.getNext().getNext());
-      actualizarIndicesDesde(actual.getNext(), actual.index + 1);
-    }
+    if (tmp.getNext() == null)
+      return;
+
+    tmp.setNext(tmp.getNext().getNext());
+    updateIndex(tmp.getNext(), tmp.index + 1);
   }
 
-  private void actualizarIndicesDesde(Node<T> node, int indiceInicial) {
+  private void updateIndex(Node<T> node, int indiceInicial) {
     Node<T> actual = node;
     int indice = indiceInicial;
     while (actual != null) {
@@ -87,11 +88,11 @@ public class ListE<T> {
   }
 
   void eliminarPares() {
-    Node<T> actual = cabeza;
+    Node<T> actual = head;
 
     while (actual.getNext() != null) {
       if (actual.index % 2 == 0 || actual.index == 0) {
-        eliminar(actual.getData());
+        delete(actual.getData());
       }
       actual = actual.getNext();
     }

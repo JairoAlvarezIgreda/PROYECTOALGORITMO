@@ -25,7 +25,7 @@ public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E,
 
   @Override
   public E save(E entity) {
-    list.insertar(entity);
+    list.add(entity);
     return list.buscar(entity);
   }
 
