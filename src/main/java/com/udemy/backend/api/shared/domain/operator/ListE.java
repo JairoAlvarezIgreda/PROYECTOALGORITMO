@@ -1,5 +1,7 @@
 package com.udemy.backend.api.shared.domain.operator;
 
+import java.util.function.Function;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.udemy.backend.api.shared.domain.data.Node;
 import com.udemy.backend.api.shared.domain.util.ListESerializer;
@@ -26,14 +28,36 @@ public class ListE<T> {
     }
   }
 
-  Integer size() {
-    Node<T> actual = head;
-    Integer size = 0;
-    while (actual != null) {
+  public int size() {
+    Node<T> tmp = head;
+    int size = 0;
+    while (tmp != null) {
       size++;
-      actual = actual.getNext();
+      tmp = tmp.getNext();
     }
     return size;
+  }
+
+  public int getPosition(T data) {
+    Node<T> tmp = head;
+    int position = 0;
+
+    while (tmp != null) {
+      if (tmp.getData().equals(data))
+        return position;
+      tmp = tmp.getNext();
+      position++;
+    }
+
+    return -1;
+  }
+
+  public void forEach(Function<T, T> func) {
+    Node<T> tmp = head;
+    while (tmp != null) {
+      func.apply(tmp.getData());
+      tmp = tmp.getNext();
+    }
   }
 
   // Imprime la lista
