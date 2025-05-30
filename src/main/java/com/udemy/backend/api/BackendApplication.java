@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BackendApplication {
 
   public static void main(String[] args) {
+      // Este es un cambio de prueba
     SpringApplication.run(BackendApplication.class, args);
   }
 }
