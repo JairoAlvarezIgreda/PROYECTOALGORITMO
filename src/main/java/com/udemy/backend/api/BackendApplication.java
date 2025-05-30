@@ -11,6 +11,7 @@ public class BackendApplication {
 
   public static void main(String[] args) {
       // Este es un cambio de prueba
+      // Otro mensaje
     SpringApplication.run(BackendApplication.class, args);
   }
 }
