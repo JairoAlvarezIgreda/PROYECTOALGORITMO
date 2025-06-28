@@ -1,10 +1,10 @@
-package com.udemy.backend.api.curso.adapter.out.repository.impl;
+package com.udemy.backend.api.curso.core.adapter.out.repository.impl;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import com.udemy.backend.api.curso.adapter.out.repository.CursoRepository;
-import com.udemy.backend.api.curso.domain.model.Curso;
+import com.udemy.backend.api.curso.core.adapter.out.repository.CursoRepository;
+import com.udemy.backend.api.curso.core.domain.model.Course;
 import com.udemy.backend.api.shared.application.repository.GlobalBasicRepository;
 
 @Primary // Equivale a un bean como iniciador.
@@ -13,9 +13,9 @@ import com.udemy.backend.api.shared.application.repository.GlobalBasicRepository
  * * Se inicializa el repositorio extendiendo los métodos de
  * * GlobalBasicRepository y CursoRepository.
  */
-public class ImplCursoRepository extends GlobalBasicRepository<Curso, Long> implements CursoRepository {
+public class ImplCursoRepository extends GlobalBasicRepository<Course, Long> implements CursoRepository {
   public ImplCursoRepository() {
-    super(Curso::getId);
+    super(Course::getId);
   }
 
 }

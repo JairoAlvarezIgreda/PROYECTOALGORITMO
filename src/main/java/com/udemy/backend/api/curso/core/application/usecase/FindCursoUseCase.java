@@ -1,12 +1,12 @@
-package com.udemy.backend.api.curso.application.usecase;
+package com.udemy.backend.api.curso.core.application.usecase;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.udemy.backend.api.curso.adapter.out.repository.CursoRepository;
-import com.udemy.backend.api.curso.application.port.in.FindCursoPort;
-import com.udemy.backend.api.curso.domain.model.Curso;
+import com.udemy.backend.api.curso.core.adapter.out.repository.CursoRepository;
+import com.udemy.backend.api.curso.core.application.port.in.FindCursoPort;
+import com.udemy.backend.api.curso.core.domain.model.Course;
 import com.udemy.backend.api.shared.domain.operator.ListE;
 
 import lombok.RequiredArgsConstructor;
@@ -23,17 +23,17 @@ public final class FindCursoUseCase implements FindCursoPort {
   private final CursoRepository cursoRepository;
 
   @Override
-  public ListE<Curso> getAll() {
+  public ListE<Course> getAll() {
     return cursoRepository.getAll();
   }
 
   @Override
-  public Optional<Curso> getById(Long id) {
+  public Optional<Course> getById(Long id) {
     return cursoRepository.findById(id);
   }
 
   @Override
-  public Optional<Curso> getByName(String name) {
-    return cursoRepository.findBy(Curso::getName, name);
+  public Optional<Course> getByName(String name) {
+    return cursoRepository.findBy(Course::getName, name);
   }
 }

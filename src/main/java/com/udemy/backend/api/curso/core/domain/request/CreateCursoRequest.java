@@ -1,4 +1,4 @@
-package com.udemy.backend.api.curso.domain.request;
+package com.udemy.backend.api.curso.core.domain.request;
 
 import lombok.Builder;
 import lombok.Getter;

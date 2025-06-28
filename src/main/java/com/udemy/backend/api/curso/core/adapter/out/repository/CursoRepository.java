@@ -1,6 +1,6 @@
-package com.udemy.backend.api.curso.adapter.out.repository;
+package com.udemy.backend.api.curso.core.adapter.out.repository;
 
-import com.udemy.backend.api.curso.domain.model.Curso;
+import com.udemy.backend.api.curso.core.domain.model.Course;
 import com.udemy.backend.api.shared.domain.repository.BasicRepository;
 
 /**
@@ -9,5 +9,5 @@ import com.udemy.backend.api.shared.domain.repository.BasicRepository;
  * * parámetro la clase o la entidad definida y como segundo parámetro el tipo
  * * del identificador.
  */
-public interface CursoRepository extends BasicRepository<Curso, Long> {
+public interface CursoRepository extends BasicRepository<Course, Long> {
 }

@@ -1,8 +1,8 @@
-package com.udemy.backend.api.curso.application.port.in;
+package com.udemy.backend.api.curso.core.application.port.in;
 
 import java.util.Optional;
 
-import com.udemy.backend.api.curso.domain.model.Curso;
+import com.udemy.backend.api.curso.core.domain.model.Course;
 import com.udemy.backend.api.shared.domain.operator.ListE;
 
 /**
@@ -15,7 +15,7 @@ public interface FindCursoPort {
    *
    * @return Los cursos.
    */
-  ListE<Curso> getAll();
+  ListE<Course> getAll();
 
   /**
    * * Obtiene un curso por su id.
@@ -23,7 +23,7 @@ public interface FindCursoPort {
    * @param id El id.
    * @return El curso, si no lo encuentra retorna vacío.
    */
-  Optional<Curso> getById(Long id);
+  Optional<Course> getById(Long id);
 
   /**
    * * Obtiene un curso por su nombre.
@@ -31,5 +31,5 @@ public interface FindCursoPort {
    * @param name El nombre del curso.
    * @return El curso, si no lo encuentra retorna vacío.
    */
-  Optional<Curso> getByName(String name);
+  Optional<Course> getByName(String name);
 }
