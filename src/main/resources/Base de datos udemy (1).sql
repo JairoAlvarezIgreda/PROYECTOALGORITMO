@@ -39,6 +39,7 @@ CREATE TABLE categorias (
 
 ALTER TABLE cursos ADD FOREIGN KEY (categoria_id) REFERENCES categorias(id);
 
+-- YA ESTÁ
 CREATE TABLE modulos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     curso_id INT NOT NULL,
@@ -48,6 +49,7 @@ CREATE TABLE modulos (
     FOREIGN KEY (curso_id) REFERENCES cursos(id)
 );
 
+-- YA ESTÁ
 CREATE TABLE clases (
     id INT AUTO_INCREMENT PRIMARY KEY,
     modulo_id INT NOT NULL,
@@ -58,6 +60,7 @@ CREATE TABLE clases (
     FOREIGN KEY (modulo_id) REFERENCES modulos(id)
 );
 
+-- YA ESTÁ
 CREATE TABLE progreso_clases (
     id INT AUTO_INCREMENT PRIMARY KEY,
     estudiante_id INT NOT NULL,
@@ -68,6 +71,7 @@ CREATE TABLE progreso_clases (
     FOREIGN KEY (clase_id) REFERENCES clases(id)
 );
 
+-- YA ESTÁ
 CREATE TABLE calificaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     estudiante_id INT NOT NULL,
@@ -79,12 +83,14 @@ CREATE TABLE calificaciones (
     FOREIGN KEY (curso_id) REFERENCES cursos(id)
 );
 
+-- YA ESTÁ
 CREATE TABLE metodos_pago (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT
 );
 
+-- YA ESTÁ
 CREATE TABLE pagos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -98,6 +104,7 @@ CREATE TABLE pagos (
     FOREIGN KEY (metodo_pago_id) REFERENCES metodos_pago(id)
 );
 
+-- YA ESTÁ
 CREATE TABLE tickets_soporte (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -108,6 +115,8 @@ CREATE TABLE tickets_soporte (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
+
+-- YA ESTÁ
 CREATE TABLE respuestas_soporte (
     id INT AUTO_INCREMENT PRIMARY KEY,
     ticket_id INT NOT NULL,
@@ -118,6 +127,7 @@ CREATE TABLE respuestas_soporte (
     FOREIGN KEY (respondido_por) REFERENCES usuarios(id)
 );
 
+-- YA ESTÁ
 CREATE TABLE comentarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
