@@ -8,7 +8,7 @@ import com.udemy.backend.api.shared.domain.operator.ListE;
 /**
  * * Definición de métodos para obtener cursos.
  */
-public interface FindCursoPort {
+public interface FindCoursePort {
 
   /**
    * * Obtiene todos los cursos.

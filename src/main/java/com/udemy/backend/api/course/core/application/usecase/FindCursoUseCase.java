@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.udemy.backend.api.course.core.adapter.out.repository.CursoRepository;
-import com.udemy.backend.api.course.core.application.port.in.FindCursoPort;
+import com.udemy.backend.api.course.core.application.port.in.FindCoursePort;
 import com.udemy.backend.api.course.core.domain.model.Course;
 import com.udemy.backend.api.shared.domain.operator.ListE;
 
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * * Implementación de la lógica para buscar cursos.
  */
-public final class FindCursoUseCase implements FindCursoPort {
+public final class FindCursoUseCase implements FindCoursePort {
 
   private final CursoRepository cursoRepository;
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.udemy.backend.api.course.core.application.port.in.CreateCursoPort;
-import com.udemy.backend.api.course.core.application.port.in.FindCursoPort;
+import com.udemy.backend.api.course.core.application.port.in.FindCoursePort;
 import com.udemy.backend.api.course.core.domain.model.Course;
 import com.udemy.backend.api.course.core.domain.request.CreateCursoRequest;
 import com.udemy.backend.api.shared.domain.operator.ListE;
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CursoController {
   private final CreateCursoPort createCursoPort;
-  private final FindCursoPort findCursoPort;
+  private final FindCoursePort findCursoPort;
 
   @PostMapping // Componente del método post.
   public ResponseEntity<Course> create(@RequestBody CreateCursoRequest request) {
