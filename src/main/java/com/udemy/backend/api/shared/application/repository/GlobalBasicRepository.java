@@ -16,7 +16,7 @@ public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E,
   private final Function<E, ID> idExtractor;
 
   @Override
-  public ListE<E> getAll() {
+  public ListE<E> findAll() {
     return list;
   }
 

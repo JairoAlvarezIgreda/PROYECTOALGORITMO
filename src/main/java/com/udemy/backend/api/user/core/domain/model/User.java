@@ -1,8 +1,8 @@
-package com.udemy.backend.api.user.core.domain;
+package com.udemy.backend.api.user.core.domain.model;
 
 import java.time.LocalDateTime;
 
-import com.udemy.backend.api.user.core.domain.enums.UserRole;
+import com.udemy.backend.api.user.core.domain.model.enums.UserRole;
 
 import lombok.Builder;
 import lombok.Getter;

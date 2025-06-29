@@ -24,7 +24,7 @@ public final class FindCursoUseCase implements FindCursoPort {
 
   @Override
   public ListE<Course> getAll() {
-    return cursoRepository.getAll();
+    return cursoRepository.findAll();
   }
 
   @Override

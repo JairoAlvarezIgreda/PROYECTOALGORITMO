@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.udemy.backend.api.shared.application.repository.GlobalBasicRepository;
 import com.udemy.backend.api.user.core.adapter.out.repository.UserRepository;
-import com.udemy.backend.api.user.core.domain.User;
+import com.udemy.backend.api.user.core.domain.model.User;
 
 @Primary
 @Repository

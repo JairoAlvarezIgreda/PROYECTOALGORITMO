@@ -21,7 +21,7 @@ public interface BasicRepository<E, ID> {
    *
    * @return La lista de las entidades.
    */
-  ListE<E> getAll();
+  ListE<E> findAll();
 
   /**
    * * Busca una entidad por su id.
