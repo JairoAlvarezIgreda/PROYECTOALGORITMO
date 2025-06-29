@@ -42,6 +42,26 @@ public class ListE<T> {
     return Optional.empty();
   }
 
+  public <R> void deleteBy(Function<T, R> idExtractor, R id) {
+    if (head == null)
+      return;
+
+    if (idExtractor.apply(head.getData()).equals(id)) {
+      head = head.getNext();
+      return;
+    }
+
+    Node<T> tmp = head;
+    while (tmp.getNext() != null && !idExtractor.apply(tmp.getNext().getData()).equals(id)) {
+      tmp = tmp.getNext();
+    }
+
+    if (tmp.getNext() == null)
+      return;
+
+    tmp.setNext(tmp.getNext().getNext());
+  }
+
   public int size() {
     Node<T> tmp = head;
     int size = 0;
@@ -90,7 +110,7 @@ public class ListE<T> {
   void printList() {
     Node<T> tmp = head;
     while (tmp != null) {
-      System.out.print(tmp.getData().toString() + ":" + tmp.index.toString() + " -> ");
+      System.out.print(tmp.getData().toString() + ":" + " -> ");
       tmp = tmp.getNext();
     }
     System.out.println("null");
@@ -104,36 +124,5 @@ public class ListE<T> {
       actual = actual.getNext();
     }
     return null;
-  }
-
-  public void delete(T data) {
-    if (head == null)
-      return;
-
-    if (head.getData().equals(data)) {
-      head = head.getNext();
-      updateIndex(head, 0);
-      return;
-    }
-
-    Node<T> tmp = head;
-    while (tmp.getNext() != null && !tmp.getNext().getData().equals(data)) {
-      tmp = tmp.getNext();
-    }
-
-    if (tmp.getNext() == null)
-      return;
-
-    tmp.setNext(tmp.getNext().getNext());
-    updateIndex(tmp.getNext(), tmp.index + 1);
-  }
-
-  private void updateIndex(Node<T> node, int indiceInicial) {
-    Node<T> actual = node;
-    int indice = indiceInicial;
-    while (actual != null) {
-      actual.index = indice++;
-      actual = actual.getNext();
-    }
   }
 }

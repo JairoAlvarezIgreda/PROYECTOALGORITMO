@@ -11,12 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Node<T> {
   public T data;
-  public Integer index;
   public Node<T> next;
 
   public Node(T dato, Integer index) {
     this.data = dato;
-    this.index = index;
     this.next = null;
   }
 }

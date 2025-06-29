@@ -56,13 +56,7 @@ public interface BasicRepository<E, ID> {
    */
   void deleteById(ID id);
 
-  /**
-   * * Verifica si una entidad existe por su id.
-   *
-   * @param id El id.
-   * @return true si existe, false si es que no.
-   */
-  boolean existsById(ID id);
+  <R> void deleteBy(Function<E, R> extractor, R expected);
 
   /**
    * Actualiza los parámetros de la entidad por el id.

@@ -16,6 +16,12 @@ public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E,
   private final Function<E, ID> idExtractor;
 
   @Override
+  public E save(E entity) {
+    list.add(entity);
+    return list.buscar(entity);
+  }
+
+  @Override
   public ListE<E> findAll() {
     return list;
   }
@@ -35,19 +41,13 @@ public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E,
   }
 
   @Override
-  public E save(E entity) {
-    list.add(entity);
-    return list.buscar(entity);
-  }
-
-  @Override
   public void deleteById(ID id) {
-    throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+    list.deleteBy(idExtractor, id);
   }
 
   @Override
-  public boolean existsById(ID id) {
-    throw new UnsupportedOperationException("Unimplemented method 'existsById'");
+  public <R> void deleteBy(Function<E, R> extractor, R expected) {
+    list.deleteBy(extractor, expected);
   }
 
   @Override
