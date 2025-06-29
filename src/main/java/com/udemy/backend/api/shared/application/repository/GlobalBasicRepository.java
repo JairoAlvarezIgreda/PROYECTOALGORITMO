@@ -1,11 +1,9 @@
 package com.udemy.backend.api.shared.application.repository;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Function;
 
 import com.udemy.backend.api.shared.domain.operator.ListE;
-import com.udemy.backend.api.shared.domain.query.FieldUpdate;
 import com.udemy.backend.api.shared.domain.repository.BasicRepository;
 
 /**
@@ -17,17 +15,16 @@ public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E,
 
   @Override
   public E save(E entity) {
-    list.add(entity);
-    return list.buscar(entity);
+    return list.add(entity);
+  }
+
+  public GlobalBasicRepository(Function<E, ID> idExtractor) {
+    this.idExtractor = idExtractor;
   }
 
   @Override
   public ListE<E> findAll() {
     return list;
-  }
-
-  public GlobalBasicRepository(Function<E, ID> idExtractor) {
-    this.idExtractor = idExtractor;
   }
 
   @Override
@@ -51,12 +48,7 @@ public abstract class GlobalBasicRepository<E, ID> implements BasicRepository<E,
   }
 
   @Override
-  public E update(ID id, FieldUpdate necessaryField, FieldUpdate... fieldUpdates) {
-    throw new UnsupportedOperationException("Unimplemented method 'update'");
-  }
-
-  @Override
-  public E update(ID id, Collection<FieldUpdate> fieldUpdates) {
-    throw new UnsupportedOperationException("Unimplemented method 'update'");
+  public E update(E data) {
+    return list.update(data, idExtractor);
   }
 }

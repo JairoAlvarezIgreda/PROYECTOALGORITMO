@@ -1,11 +1,9 @@
 package com.udemy.backend.api.shared.domain.repository;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Function;
 
 import com.udemy.backend.api.shared.domain.operator.ListE;
-import com.udemy.backend.api.shared.domain.query.FieldUpdate;
 
 /**
  * * Funcionalidades básicas para un repositorio.
@@ -65,14 +63,5 @@ public interface BasicRepository<E, ID> {
    * @param fieldUpdates Los parámetros a actualizar.
    * @return La entidad actualizada.
    */
-  E update(ID id, FieldUpdate necessaryField, FieldUpdate... fieldUpdates);
-
-  /**
-   * Actualiza los parámetros de la entidad por el id.
-   *
-   * @param id           El id de la entidad.
-   * @param fieldUpdates Los parámetros a actualizar.
-   * @return La entidad actualizada.
-   */
-  E update(ID id, Collection<FieldUpdate> fieldUpdates);
+  E update(E data);
 }

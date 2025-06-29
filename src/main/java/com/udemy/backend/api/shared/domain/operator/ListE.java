@@ -1,5 +1,6 @@
 package com.udemy.backend.api.shared.domain.operator;
 
+import java.lang.reflect.Field;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -15,7 +16,7 @@ public class ListE<T> {
   Node<T> head;
 
   // Agrega un node al final de la lista
-  public void add(T data) {
+  public T add(T data) {
     Node<T> newNode = new Node<T>(data, size());
 
     if (head == null) {
@@ -27,6 +28,19 @@ public class ListE<T> {
       }
       tmp.setNext(newNode);
     }
+    return newNode.getData();
+  }
+
+  public <R> T update(T data, Function<T, R> idExtractor) {
+    R id = idExtractor.apply(data);
+
+    Optional<T> existingNode = getBy(idExtractor, id);
+    if (existingNode.isPresent()) {
+      mergeNonNullFields(existingNode.get(), data);
+      return existingNode.get();
+    }
+
+    throw new Error("La entidad no existe");
   }
 
   public <R> Optional<T> getBy(Function<T, R> idExtractor, R id) {
@@ -116,13 +130,17 @@ public class ListE<T> {
     System.out.println("null");
   }
 
-  public T buscar(T data) {
-    Node<T> actual = head;
-    while (actual != null) {
-      if (actual.getData() == data)
-        return actual.getData();
-      actual = actual.getNext();
+  void mergeNonNullFields(T target, T source) {
+    try {
+      for (Field field : source.getClass().getDeclaredFields()) {
+        field.setAccessible(true);
+        Object value = field.get(source);
+        if (value != null && !"id".equalsIgnoreCase(field.getName())) {
+          field.set(target, value);
+        }
+      }
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException("Error al hacer merge de campos", e);
     }
-    return null;
   }
 }
