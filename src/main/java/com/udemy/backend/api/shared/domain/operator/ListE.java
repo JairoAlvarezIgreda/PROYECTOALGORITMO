@@ -34,13 +34,17 @@ public class ListE<T> {
   public <R> T update(T data, Function<T, R> idExtractor) {
     R id = idExtractor.apply(data);
 
-    Optional<T> existingNode = getBy(idExtractor, id);
-    if (existingNode.isPresent()) {
-      mergeNonNullFields(existingNode.get(), data);
-      return existingNode.get();
+    Node<T> current = head;
+    while (current != null) {
+      T currentData = current.getData();
+      if (idExtractor.apply(currentData).equals(id)) {
+        mergeNonNullFields(currentData, data);
+        return currentData;
+      }
+      current = current.getNext();
     }
 
-    throw new Error("La entidad no existe");
+    throw new Error("La entidad no existe con ID: " + id);
   }
 
   public <R> Optional<T> getBy(Function<T, R> idExtractor, R id) {
@@ -140,7 +144,8 @@ public class ListE<T> {
         }
       }
     } catch (IllegalAccessException e) {
-      throw new RuntimeException("Error al hacer merge de campos", e);
+      throw new RuntimeException("Error actualizando campos no nulos", e);
     }
   }
+
 }
