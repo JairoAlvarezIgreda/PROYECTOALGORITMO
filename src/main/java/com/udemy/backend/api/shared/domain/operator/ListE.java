@@ -44,7 +44,7 @@ public class ListE<T> {
       current = current.getNext();
     }
 
-    throw new Error("La entidad no existe con ID: " + id);
+    throw new RuntimeException("La entidad no existe con ID: " + id);
   }
 
   public <R> Optional<T> getBy(Function<T, R> idExtractor, R id) {
