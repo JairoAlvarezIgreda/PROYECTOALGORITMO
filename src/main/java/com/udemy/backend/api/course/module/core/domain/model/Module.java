@@ -4,8 +4,10 @@ import com.udemy.backend.api.course.core.domain.model.Course;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Builder
 public class Module {
 
