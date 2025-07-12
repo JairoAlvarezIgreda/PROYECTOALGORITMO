@@ -15,11 +15,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public final class CreateCategoryUseCase implements CreateCategoryPort {
   private final CategoryRepository categoryRepository;
+  private Long idGenerator = 0L;
 
   @Override
   public Category create(CreateCategoryRequest request) {
+    idGenerator += 1;
+
     Category category = Category
         .builder()
+        .id(idGenerator)
         .name(request.getName())
         .build();
 

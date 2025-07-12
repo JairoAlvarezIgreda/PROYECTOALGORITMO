@@ -3,7 +3,6 @@ package com.udemy.backend.api.course.category.core.adapter.out.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.udemy.backend.api.course.category.core.application.port.CreateCategoryPort;
@@ -11,7 +10,6 @@ import com.udemy.backend.api.course.category.core.domain.request.CreateCategoryR
 
 import jakarta.annotation.PostConstruct;
 
-@DependsOn("course_seeder")
 @Component("category_seeder")
 public class CategorySeeder {
   @Autowired
