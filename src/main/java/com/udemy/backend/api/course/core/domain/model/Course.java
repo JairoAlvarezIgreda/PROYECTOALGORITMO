@@ -1,7 +1,8 @@
 package com.udemy.backend.api.course.core.domain.model;
 
 import java.time.LocalDateTime;
-import java.util.Locale.Category;
+
+import com.udemy.backend.api.course.category.core.domain.model.Category;
 
 import lombok.Builder;
 import lombok.Getter;
