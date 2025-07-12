@@ -11,4 +11,6 @@ import lombok.Getter;
          // forma directa.
 public final class CreateCursoRequest {
   private String name; // En este caso solo se requiere el nombre del curso para poder crear uno nuevo.
+  private String description;
+  private Long categoryId;
 }

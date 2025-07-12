@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
  * * Implementación de la lógica para crear un curso.
  */
 public final class CreateCursoUseCase implements CreateCursoPort {
-
   private final CursoRepository cursoRepository;
   private Long idGenerator = 0L;
 
@@ -31,6 +30,7 @@ public final class CreateCursoUseCase implements CreateCursoPort {
         .builder()
         .id(idGenerator)
         .name(request.getName())
+        .description(request.getDescription())
         .build();
     idGenerator += 1;
 
