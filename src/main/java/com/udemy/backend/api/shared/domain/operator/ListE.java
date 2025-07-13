@@ -2,6 +2,7 @@ package com.udemy.backend.api.shared.domain.operator;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -104,10 +105,10 @@ public class ListE<T> {
     return -1;
   }
 
-  public void forEach(Function<T, T> func) {
+  public void forEach(Consumer<T> action) {
     Node<T> tmp = head;
     while (tmp != null) {
-      func.apply(tmp.getData());
+      action.accept(tmp.getData());
       tmp = tmp.getNext();
     }
   }

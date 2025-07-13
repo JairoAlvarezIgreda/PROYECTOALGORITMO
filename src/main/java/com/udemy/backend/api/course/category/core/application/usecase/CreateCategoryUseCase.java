@@ -19,13 +19,19 @@ public final class CreateCategoryUseCase implements CreateCategoryPort {
 
   @Override
   public Category create(CreateCategoryRequest request) {
-    idGenerator += 1;
+    idGenerator++;
 
     Category category = Category
         .builder()
         .id(idGenerator)
         .name(request.getName())
         .build();
+
+    log.info("Creando categoría con ID: {}", category.getId());
+
+    if (category.getId() == null) {
+      throw new IllegalStateException("Intentando guardar una categoría sin ID: " + category.getName());
+    }
 
     return categoryRepository.save(category);
   }

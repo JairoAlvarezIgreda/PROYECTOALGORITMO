@@ -20,4 +20,19 @@ public class Course {
   private Double price;
   private LocalDateTime createdAt;
   private Category category;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Course course = (Course) o;
+    return id != null && id.equals(course.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return id != null ? id.hashCode() : 0;
+  }
 }

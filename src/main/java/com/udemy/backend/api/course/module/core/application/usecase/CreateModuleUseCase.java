@@ -18,18 +18,23 @@ import lombok.extern.slf4j.Slf4j;
 public final class CreateModuleUseCase implements CreateModulePort {
   private final ModuleRepository moduleRepository;
   private final FindCoursePort findCoursePort;
+  private Long idGenerator = 0L;
 
   @Override
   public Module create(CreateModuleRequest request) {
     Course course = findCoursePort.getById(request.getCourseId())
         .orElseThrow(() -> new RuntimeException("El curso no existe"));
 
+    idGenerator++;
+
     Module module = Module
         .builder()
+        .id(idGenerator)
         .course(course)
         .title(request.getTitle())
         .description(request.getDescription())
         .order(request.getOrder())
+        .duration(request.getDuration())
         .build();
 
     return moduleRepository.save(module);

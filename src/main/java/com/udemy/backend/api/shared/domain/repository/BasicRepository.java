@@ -38,6 +38,8 @@ public interface BasicRepository<E, ID> {
    */
   <R> Optional<E> findBy(Function<E, R> extractor, R expected);
 
+  public <R> ListE<E> findAllBy(Function<E, R> extractor, R expected);
+
   /**
    * * Guarda la entidad en la lista.
    *

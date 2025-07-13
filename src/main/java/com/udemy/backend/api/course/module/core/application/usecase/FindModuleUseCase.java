@@ -29,8 +29,8 @@ public final class FindModuleUseCase implements FindModulePort {
   @Override
   public ListE<Module> getAllByCourseId(Long id) {
     Course course = findCoursePort.getById(id).orElseThrow(() -> new RuntimeException("El curso no existe"));
-    // TODO Auto-generated method stub
-    return null;
+    log.info("Buscanding " + id);
+    return moduleRepository.findAllBy(Module::getCourse, course);
   }
 
   @Override
