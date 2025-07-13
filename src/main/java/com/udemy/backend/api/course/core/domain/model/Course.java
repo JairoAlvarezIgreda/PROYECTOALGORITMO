@@ -14,7 +14,10 @@ public class Course {
 
   private Long id; // En este caso el id es de tipo Long, osea un valor numérico.
   private String name;
+  private String littleDescription;
   private String description;
+  private String tags;
+  private Double price;
   private LocalDateTime createdAt;
   private Category category;
 }

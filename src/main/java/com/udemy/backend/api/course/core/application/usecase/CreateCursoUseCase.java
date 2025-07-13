@@ -38,7 +38,10 @@ public final class CreateCursoUseCase implements CreateCursoPort {
         .builder()
         .id(idGenerator)
         .name(request.getName())
+        .littleDescription(request.getLittleDescription())
         .description(request.getDescription())
+        .tags(request.getTags())
+        .price(request.getPrice())
         .category(category)
         .createdAt(LocalDateTime.now())
         .build();
