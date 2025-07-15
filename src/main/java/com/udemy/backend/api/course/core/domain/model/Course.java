@@ -20,6 +20,7 @@ public class Course {
   private Double price;
   private LocalDateTime createdAt;
   private Category category;
+  private String imagePath;
 
   @Override
   public boolean equals(Object o) {

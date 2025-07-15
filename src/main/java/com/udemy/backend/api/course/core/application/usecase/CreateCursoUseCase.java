@@ -44,6 +44,7 @@ public final class CreateCursoUseCase implements CreateCursoPort {
         .price(request.getPrice())
         .category(category)
         .createdAt(LocalDateTime.now())
+        .imagePath(request.getImagePath())
         .build();
 
     // Se guarda el nuevo curso en la base de datos con las funciones del

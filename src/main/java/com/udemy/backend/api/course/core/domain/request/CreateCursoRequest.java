@@ -16,4 +16,5 @@ public final class CreateCursoRequest {
   private String tags;
   private Double price;
   private Long categoryId;
+  private String imagePath;
 }
