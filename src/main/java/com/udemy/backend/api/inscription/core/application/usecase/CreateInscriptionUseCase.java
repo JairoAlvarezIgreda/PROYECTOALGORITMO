@@ -23,6 +23,7 @@ public final class CreateInscriptionUseCase implements CreateInscriptionPort {
   private final InscriptionRepository inscriptionRepository;
   private final FindUserPort findUserPort;
   private final FindCoursePort findCoursePort;
+  private Long idGenerator = 0L;
 
   @Override
   public Inscription create(CreateInscriptionRequest request) {
@@ -32,8 +33,10 @@ public final class CreateInscriptionUseCase implements CreateInscriptionPort {
     Course course = findCoursePort.getById(request.getCourseId())
         .orElseThrow(() -> new RuntimeException("El curso no existe"));
 
+    idGenerator += 1;
     Inscription inscription = Inscription
         .builder()
+        .id(idGenerator)
         .student(user)
         .course(course)
         .inscriptionDate(LocalDateTime.now())
