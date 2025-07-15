@@ -29,8 +29,7 @@ public final class FindInscriptionUseCase implements FindInscriptionPort {
   @Override
   public ListE<Inscription> getAllByUserId(Long id) {
     User user = findUserPort.getById(id).orElseThrow(() -> new RuntimeException("El usuario no existe"));
-    // TODO Auto-generated method stub
-    return null;
+    return inscriptionRepository.findAllBy(Inscription::getStudent, user);
   }
 
   @Override

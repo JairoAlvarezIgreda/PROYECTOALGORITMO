@@ -37,7 +37,7 @@ public final class FindUserUseCase implements FindUserPort {
         .orElseThrow(() -> new ErrorException(HttpStatus.UNAUTHORIZED, "El usuario no existe"));
 
     if (!user.getPassword().equals(request.getPassword()))
-      new ErrorException(HttpStatus.UNAUTHORIZED, "Contraseña incorrecta");
+      throw new ErrorException(HttpStatus.UNAUTHORIZED, "Contraseña incorrecta");
 
     return user;
   }
