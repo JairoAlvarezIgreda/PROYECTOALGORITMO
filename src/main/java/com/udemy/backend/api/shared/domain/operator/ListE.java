@@ -61,6 +61,43 @@ public class ListE<T> {
     return Optional.empty();
   }
 
+  public <R> Optional<T> getByLike(Function<T, R> extractor, R value) {
+    Node<T> current = head;
+
+    while (current != null) {
+      R fieldValue = extractor.apply(current.getData());
+
+      if (fieldValue instanceof String && value instanceof String) {
+        String fieldStr = ((String) fieldValue);
+        String searchStr = ((String) value);
+
+        if (fieldStr != null && fieldStr.toLowerCase().contains(searchStr.toLowerCase())) {
+          return Optional.of(current.getData());
+        }
+      }
+
+      current = current.getNext();
+    }
+
+    return Optional.empty();
+  }
+
+  public ListE<T> getAllByLike(Function<T, String> extractor, String value) {
+    ListE<T> result = new ListE<>();
+    Node<T> current = head;
+
+    while (current != null) {
+      T item = current.getData();
+      String field = extractor.apply(item);
+      if (field != null && field.toLowerCase().contains(value.toLowerCase())) {
+        result.add(item);
+      }
+      current = current.getNext();
+    }
+
+    return result;
+  }
+
   public <R> void deleteBy(Function<T, R> idExtractor, R id) {
     if (head == null)
       return;

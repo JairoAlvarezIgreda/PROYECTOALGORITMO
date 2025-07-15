@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.udemy.backend.api.course.category.core.application.port.FindCategoryPort;
+import com.udemy.backend.api.course.category.core.domain.model.Category;
 import com.udemy.backend.api.course.core.adapter.out.repository.CursoRepository;
 import com.udemy.backend.api.course.core.application.port.in.FindCoursePort;
 import com.udemy.backend.api.course.core.domain.model.Course;
@@ -21,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public final class FindCursoUseCase implements FindCoursePort {
 
   private final CursoRepository cursoRepository;
+  private final FindCategoryPort findCategoryPort;
 
   @Override
   public ListE<Course> getAll() {
@@ -34,6 +37,18 @@ public final class FindCursoUseCase implements FindCoursePort {
 
   @Override
   public Optional<Course> getByName(String name) {
-    return cursoRepository.findBy(Course::getName, name);
+    Optional<Course> curso = cursoRepository.findBy(Course::getName, name);
+    return curso;
+  }
+
+  @Override
+  public ListE<Course> getAllByName(String name) {
+    return cursoRepository.findAllByLike(Course::getName, name);
+  }
+
+  @Override
+  public ListE<Course> getAllByCategory(Long id) {
+    Category category = findCategoryPort.getById(id).orElseThrow(() -> new RuntimeException("La categoría no existe"));
+    return cursoRepository.findAllBy(Course::getCategory, category);
   }
 }

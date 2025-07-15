@@ -32,4 +32,8 @@ public interface FindCoursePort {
    * @return El curso, si no lo encuentra retorna vacío.
    */
   Optional<Course> getByName(String name);
+
+  ListE<Course> getAllByName(String name);
+
+  ListE<Course> getAllByCategory(Long id);
 }

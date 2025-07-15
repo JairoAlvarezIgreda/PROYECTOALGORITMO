@@ -3,7 +3,14 @@ package com.udemy.backend.api.shared.domain.operator;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class BinarySearchTree<T> {
+public class BinarySearchTree<T, K extends Comparable<? super K>> {
+  private final Function<T, K> keyExtractor;
+  private TreeNode<T> root;
+
+  public BinarySearchTree(Function<T, K> keyExtractor) {
+    this.keyExtractor = keyExtractor;
+  }
+
   private static class TreeNode<T> {
     T data;
     TreeNode<T> left, right;
@@ -11,13 +18,6 @@ public class BinarySearchTree<T> {
     TreeNode(T data) {
       this.data = data;
     }
-  }
-
-  private TreeNode<T> root;
-  private final Function<T, Comparable<?>> keyExtractor;
-
-  public BinarySearchTree(Function<T, Comparable<?>> keyExtractor) {
-    this.keyExtractor = keyExtractor;
   }
 
   public void insert(T data) {
@@ -38,8 +38,8 @@ public class BinarySearchTree<T> {
       return new TreeNode<>(data);
     }
 
-    Comparable<Object> dataKey = (Comparable<Object>) keyExtractor.apply(data);
-    Object nodeKey = keyExtractor.apply(node.data);
+    K dataKey = keyExtractor.apply(data);
+    K nodeKey = keyExtractor.apply(node.data);
 
     int cmp = dataKey.compareTo(nodeKey);
 
@@ -48,7 +48,7 @@ public class BinarySearchTree<T> {
     } else if (cmp > 0) {
       node.right = insertRecursive(node.right, data);
     } else {
-      node.data = data; // Reemplaza si es igual
+      node.data = data;
     }
 
     return node;
@@ -56,16 +56,31 @@ public class BinarySearchTree<T> {
 
   public Optional<T> search(T target) {
     TreeNode<T> current = root;
-    Comparable<Object> targetKey = (Comparable<Object>) keyExtractor.apply(target);
+    K targetKey = keyExtractor.apply(target);
 
     while (current != null) {
-      Object currentKey = keyExtractor.apply(current.data);
+      K currentKey = keyExtractor.apply(current.data);
       int cmp = targetKey.compareTo(currentKey);
 
       if (cmp == 0) {
         return Optional.of(current.data);
       }
 
+      current = (cmp < 0) ? current.left : current.right;
+    }
+
+    return Optional.empty();
+  }
+
+  public Optional<T> searchBy(Function<T, K> extractor, K expected) {
+    TreeNode<T> current = root;
+
+    while (current != null) {
+      K currentKey = extractor.apply(current.data);
+      int cmp = expected.compareTo(currentKey);
+
+      if (cmp == 0)
+        return Optional.of(current.data);
       current = (cmp < 0) ? current.left : current.right;
     }
 
@@ -81,8 +96,8 @@ public class BinarySearchTree<T> {
       return null;
     }
 
-    Comparable<Object> targetKey = (Comparable<Object>) keyExtractor.apply(target);
-    Object nodeKey = keyExtractor.apply(node.data);
+    K targetKey = keyExtractor.apply(target);
+    K nodeKey = keyExtractor.apply(node.data);
 
     int cmp = targetKey.compareTo(nodeKey);
 

@@ -9,13 +9,12 @@ import com.udemy.backend.api.shared.domain.repository.BasicRepository;
 
 public abstract class GlobalBasicRepository<E, ID extends Comparable<? super ID>> implements BasicRepository<E, ID> {
   private final ListE<E> list = new ListE<>();
-  private final BinarySearchTree<E> tree;
+  private final BinarySearchTree<E, ID> tree;
   private final Function<E, ID> idExtractor;
 
-  @SuppressWarnings("unchecked")
   public GlobalBasicRepository(Function<E, ID> idExtractor) {
     this.idExtractor = idExtractor;
-    this.tree = new BinarySearchTree<>((Function<E, Comparable<?>>) idExtractor);
+    this.tree = new BinarySearchTree<>(idExtractor);
   }
 
   @Override
@@ -34,25 +33,26 @@ public abstract class GlobalBasicRepository<E, ID extends Comparable<? super ID>
 
   @Override
   public void deleteById(ID id) {
-    list.getBy(idExtractor, id).ifPresent(tree::delete);
+    Optional<E> found = tree.searchBy(idExtractor, id);
+    found.ifPresent(tree::delete);
     list.deleteBy(idExtractor, id);
   }
 
   @Override
   public <R> void deleteBy(Function<E, R> extractor, R expected) {
-    list.getBy(extractor, expected).ifPresent(tree::delete);
+    Optional<E> found = list.getBy(extractor, expected);
+    found.ifPresent(tree::delete);
     list.deleteBy(extractor, expected);
   }
 
   @Override
   public Optional<E> findById(ID id) {
-    return list.getBy(idExtractor, id)
-        .flatMap(tree::search);
+    return tree.searchBy(idExtractor, id);
   }
 
   @Override
   public <R> Optional<E> findBy(Function<E, R> extractor, R expected) {
-    return list.getBy(extractor, expected);
+    return list.getByLike(extractor, expected);
   }
 
   @Override
@@ -64,8 +64,21 @@ public abstract class GlobalBasicRepository<E, ID extends Comparable<? super ID>
   public <R> ListE<E> findAllBy(Function<E, R> extractor, R expected) {
     ListE<E> result = new ListE<>();
     list.forEach((item) -> {
-      if (extractor.apply(item).equals(expected))
+      if (extractor.apply(item).equals(expected)) {
         result.add(item);
+      }
+    });
+    return result;
+  }
+
+  @Override
+  public ListE<E> findAllByLike(Function<E, String> extractor, String partial) {
+    ListE<E> result = new ListE<>();
+    list.forEach(item -> {
+      String field = extractor.apply(item);
+      if (field != null && field.toLowerCase().contains(partial.toLowerCase())) {
+        result.add(item);
+      }
     });
     return result;
   }

@@ -38,7 +38,9 @@ public interface BasicRepository<E, ID> {
    */
   <R> Optional<E> findBy(Function<E, R> extractor, R expected);
 
-  public <R> ListE<E> findAllBy(Function<E, R> extractor, R expected);
+  <R> ListE<E> findAllBy(Function<E, R> extractor, R expected);
+
+  ListE<E> findAllByLike(Function<E, String> extractor, String partial);
 
   /**
    * * Guarda la entidad en la lista.

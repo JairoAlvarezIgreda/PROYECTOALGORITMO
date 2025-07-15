@@ -1,12 +1,15 @@
 package com.udemy.backend.api.course.core.adapter.in.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.udemy.backend.api.course.core.application.port.in.CreateCursoPort;
 import com.udemy.backend.api.course.core.application.port.in.FindCoursePort;
@@ -42,6 +45,19 @@ public class CursoController {
   @GetMapping("/name/{name}")
   public ResponseEntity<Course> getByName(@PathVariable String name) {
     return ResponseEntity
-        .ok(findCursoPort.getByName(name).orElseThrow(() -> new RuntimeException("Curso no encontrado")));
+        .ok(findCursoPort.getByName(name)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Curso no encontrado")));
   }
+
+  @GetMapping("/search")
+  public ResponseEntity<ListE<Course>> getAllByName(@RequestParam(required = false) String name,
+      @RequestParam(required = false) Long category) {
+    ListE<Course> cursos;
+    if (category == null)
+      cursos = findCursoPort.getAllByName(name);
+    else
+      cursos = findCursoPort.getAllByCategory(category);
+    return ResponseEntity.ok(cursos);
+  }
+
 }
