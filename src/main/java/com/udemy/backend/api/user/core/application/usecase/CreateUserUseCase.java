@@ -22,14 +22,16 @@ public final class CreateUserUseCase implements CreateUserPort {
 
   @Override
   public User create(CreateUserRequest request) {
-    idGenerator += 1;
+    idGenerator++;
 
     User newUser = User
         .builder()
+        .id(idGenerator)
         .name(request.getName())
+        .lastName(request.getLastName())
         .email(request.getEmail())
         .password(request.getPassword())
-        .role(UserRole.valueOf(request.getRole()))
+        .role(UserRole.STUDENT)
         .createdAt(LocalDateTime.now())
         .build();
 
