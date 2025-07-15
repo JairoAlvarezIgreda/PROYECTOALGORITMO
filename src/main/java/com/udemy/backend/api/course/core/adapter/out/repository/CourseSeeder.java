@@ -100,7 +100,7 @@ public class CourseSeeder {
 
         CreateCursoRequest.builder().name("Curso de C++").littleDescription("Fundamentos de C++")
             .description("Programación estructurada y orientada a objetos").tags("c++,programación").price(49.99)
-            .categoryId(1L).imagePath("/course/C++.PNG").build(),
+            .categoryId(1L).imagePath("/course/C-Plus-Plus.PNG").build(),
 
         CreateCursoRequest.builder().name("Algoritmos y estructuras de datos")
             .littleDescription("Resolviendo problemas").description("Listas, pilas, colas, árboles, grafos")
@@ -109,7 +109,7 @@ public class CourseSeeder {
 
         CreateCursoRequest.builder().name("Curso de C#").littleDescription("Programación con .NET")
             .description("Crea aplicaciones con C# y .NET").tags("csharp,dotnet").price(59.99).categoryId(1L)
-            .imagePath("/course/C#.PNG").build(),
+            .imagePath("/course/C-Sharp.PNG").build(),
 
         CreateCursoRequest.builder().name("Curso de PHP").littleDescription("Backend clásico")
             .description("Desarrolla sitios web con PHP").tags("php,backend").price(34.99).categoryId(4L)
