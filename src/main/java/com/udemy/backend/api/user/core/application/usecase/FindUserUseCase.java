@@ -41,4 +41,9 @@ public final class FindUserUseCase implements FindUserPort {
 
     return user;
   }
+
+  @Override
+  public Integer count() {
+    return userRepository.findAll().size();
+  }
 }

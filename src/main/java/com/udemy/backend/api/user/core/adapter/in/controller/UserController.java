@@ -36,6 +36,11 @@ public class UserController {
     return ResponseEntity.ok(findUserPort.getById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
   }
 
+  @GetMapping("/count")
+  public ResponseEntity<Integer> count() {
+    return ResponseEntity.ok(findUserPort.count());
+  }
+
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody LoginUserRequest request) {
     try {
@@ -46,5 +51,4 @@ public class UserController {
           .body(Map.of("message", e.getMessage()));
     }
   }
-
 }

@@ -12,4 +12,6 @@ public interface FindUserPort {
   Optional<User> getById(Long id);
 
   User login(LoginUserRequest request);
+
+  Integer count();
 }
